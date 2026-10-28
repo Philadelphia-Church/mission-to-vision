@@ -50,7 +50,7 @@ export default function Programs() {
 
       <section className="bg-secondary-50">
         <div className="section-container">
-          <h2 className="section-title">Program Areas</h2>
+          <h2 className="section-title">Spiritual Mentor</h2>
           <p className="section-subtitle max-w-2xl mx-auto">
             Illustrative focus areas, to be finalized as programs take shape.
           </p>
