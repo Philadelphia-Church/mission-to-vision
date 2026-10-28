@@ -123,6 +123,12 @@ export default function Services() {
       </section>
 
       <section className="section-container max-w-3xl mx-auto text-center">
+        <h2 className="section-title">
+          We Provide Quality Digging, Excavation and Concreting Services in Melbourne
+        </h2>
+      </section>
+
+      <section className="section-container max-w-3xl mx-auto text-center pt-0">
         <h2 className="section-title">Land Clearing Services in Melbourne</h2>
         <p className="text-gray-700 leading-relaxed">
           Whether you are prepping a block for construction, reclaiming an overgrown yard, or
