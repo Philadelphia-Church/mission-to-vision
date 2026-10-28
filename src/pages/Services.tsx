@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Trees, Mountain, Droplets, Home } from 'lucide-react'
+import { Trees, Mountain, Droplets, Home, X } from 'lucide-react'
 
 const quickServices = [
   'Residential Land Clearing',
@@ -85,7 +86,15 @@ const serviceGroups = [
   },
 ]
 
-const beforeAfterSets = [
+interface BeforeAfterSet {
+  title: string
+  before: string
+  after: string
+  beforeIsVideo?: boolean
+  afterIsVideo?: boolean
+}
+
+const beforeAfterSets: BeforeAfterSet[] = [
   {
     title: 'Land Clearing',
     before: '/images/services/land-clearing-1-before.jpg',
@@ -103,9 +112,9 @@ const beforeAfterSets = [
   },
   {
     title: 'Weed Removal',
-    before: '/images/services/weed-removal-3-before.jpg',
-    after: '/images/services/weed-removal-3-after.mp4',
-    afterIsVideo: true,
+    before: '/images/services/weed-removal-3-after.mp4',
+    beforeIsVideo: true,
+    after: '/images/services/weed-removal-3-before.jpg',
   },
 ]
 
@@ -127,6 +136,8 @@ const landClearingCoverage = [
 ]
 
 export default function Services() {
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null)
+
   return (
     <div>
       <section className="bg-primary-700 text-white">
@@ -192,20 +203,47 @@ export default function Services() {
         </div>
       </section>
 
+      <section className="bg-secondary-50">
+        <div className="section-container">
+          <h2 className="section-title">Recent Landscaping Work</h2>
+          <p className="section-subtitle max-w-2xl mx-auto">
+            Levelling and grading from a recent site. Click a photo to view it full size.
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-5xl mx-auto">
+            {landscapingPhotos.map((src, i) => (
+              <img
+                key={src}
+                src={src}
+                alt={`Landscaping levelling ${i + 1}`}
+                onClick={() => setLightboxSrc(src)}
+                className="w-full h-32 object-cover rounded-md cursor-pointer hover:opacity-90 transition-opacity"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section-container">
         <h2 className="section-title">Before &amp; After</h2>
-        <p className="section-subtitle max-w-2xl mx-auto">Real results from recent jobs.</p>
+        <p className="section-subtitle max-w-2xl mx-auto">
+          Real results from recent jobs. Click a photo to view it full size.
+        </p>
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {beforeAfterSets.map((set, i) => (
             <div key={i} className="card">
               <h3 className="font-bold text-lg mb-3 text-secondary-700">{set.title}</h3>
               <div className="grid grid-cols-2 gap-2">
                 <div>
-                  <img
-                    src={set.before}
-                    alt={`${set.title} before`}
-                    className="w-full h-40 object-cover rounded-md"
-                  />
+                  {set.beforeIsVideo ? (
+                    <video src={set.before} controls className="w-full h-40 object-cover rounded-md" />
+                  ) : (
+                    <img
+                      src={set.before}
+                      alt={`${set.title} before`}
+                      onClick={() => setLightboxSrc(set.before)}
+                      className="w-full h-40 object-cover rounded-md cursor-pointer hover:opacity-90 transition-opacity"
+                    />
+                  )}
                   <p className="text-xs text-center text-gray-500 mt-1">Before</p>
                 </div>
                 <div>
@@ -215,7 +253,8 @@ export default function Services() {
                     <img
                       src={set.after}
                       alt={`${set.title} after`}
-                      className="w-full h-40 object-cover rounded-md"
+                      onClick={() => setLightboxSrc(set.after)}
+                      className="w-full h-40 object-cover rounded-md cursor-pointer hover:opacity-90 transition-opacity"
                     />
                   )}
                   <p className="text-xs text-center text-gray-500 mt-1">After</p>
@@ -223,25 +262,6 @@ export default function Services() {
               </div>
             </div>
           ))}
-        </div>
-      </section>
-
-      <section className="bg-secondary-50">
-        <div className="section-container">
-          <h2 className="section-title">Recent Landscaping Work</h2>
-          <p className="section-subtitle max-w-2xl mx-auto">
-            Levelling and grading from a recent site.
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-5xl mx-auto">
-            {landscapingPhotos.map((src, i) => (
-              <img
-                key={src}
-                src={src}
-                alt={`Landscaping levelling ${i + 1}`}
-                className="w-full h-32 object-cover rounded-md"
-              />
-            ))}
-          </div>
         </div>
       </section>
 
@@ -273,6 +293,27 @@ export default function Services() {
           </Link>
         </div>
       </section>
+
+      {lightboxSrc && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setLightboxSrc(null)}
+        >
+          <button
+            className="absolute top-4 right-4 text-white hover:text-gray-300"
+            onClick={() => setLightboxSrc(null)}
+            aria-label="Close"
+          >
+            <X size={32} />
+          </button>
+          <img
+            src={lightboxSrc}
+            alt="Full size view"
+            className="max-w-full max-h-full object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   )
 }
