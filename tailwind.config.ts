@@ -7,21 +7,34 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Navy, from the "Mission" wordmark and icon in the logo.
         primary: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a',
+          50: '#eef3fa',
+          100: '#d4e0f0',
+          200: '#a9c1e0',
+          300: '#7ea2d0',
+          400: '#4f7ab5',
+          500: '#2f5a99',
+          600: '#1c4178',
+          700: '#10305f',
+          800: '#0b2348',
+          900: '#071730',
         },
+        // Maroon, from the "Vision" wordmark and icon in the logo.
         secondary: {
-          50: '#f8fafc',
-          600: '#475569',
-          700: '#334155',
+          50: '#fbeef1',
+          100: '#f3d2da',
+          200: '#e3a5b3',
+          300: '#cf7890',
+          400: '#a84d64',
+          500: '#7c2f47',
+          600: '#601830',
+          700: '#4a1226',
+          800: '#350d1b',
+          900: '#230811',
         },
-        accent: '#f59e0b',
+        // Gold, from "to" and the tagline underline in the logo.
+        accent: '#b8862a',
         cream: '#f7f7f5',
       },
       fontFamily: {
