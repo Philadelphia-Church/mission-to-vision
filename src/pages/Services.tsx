@@ -102,13 +102,13 @@ const beforeAfterSets: BeforeAfterSet[] = [
   },
   {
     title: 'Weed Removal',
-    before: '/images/services/weed-removal-1-before.jpg',
-    after: '/images/services/weed-removal-1-after.jpg',
+    before: '/images/services/weed-removal-1-after.jpg',
+    after: '/images/services/weed-removal-1-before.jpg',
   },
   {
     title: 'Weed Removal',
-    before: '/images/services/weed-removal-2-before.jpg',
-    after: '/images/services/weed-removal-2-after.jpg',
+    before: '/images/services/weed-removal-2-after.jpg',
+    after: '/images/services/weed-removal-2-before.jpg',
   },
   {
     title: 'Weed Removal',
