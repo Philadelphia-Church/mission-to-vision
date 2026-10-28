@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Trees, Mountain, Droplets, Home, X } from 'lucide-react'
+import { Trees, Mountain, Droplets, Home, X, ChevronLeft, ChevronRight } from 'lucide-react'
 
 const quickServices = [
   'Residential Land Clearing',
@@ -126,6 +126,11 @@ const landscapingPhotos = [
   '/images/services/landscaping-leveling-5.jpg',
 ]
 
+const beforeAfterPhotos = beforeAfterSets.flatMap((set) => [
+  ...(set.beforeIsVideo ? [] : [set.before]),
+  ...(set.afterIsVideo ? [] : [set.after]),
+])
+
 const landClearingCoverage = [
   'Tree clearing services and bulk vegetation removal',
   'Scrub removal, brush and undergrowth removal',
@@ -136,7 +141,35 @@ const landClearingCoverage = [
 ]
 
 export default function Services() {
-  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null)
+  const [lightbox, setLightbox] = useState<{ images: string[]; index: number } | null>(null)
+
+  const openLightbox = (images: string[], src: string) => {
+    const index = images.indexOf(src)
+    setLightbox({ images, index: index === -1 ? 0 : index })
+  }
+
+  const showNext = () =>
+    setLightbox((current) =>
+      current ? { ...current, index: (current.index + 1) % current.images.length } : current
+    )
+
+  const showPrev = () =>
+    setLightbox((current) =>
+      current
+        ? { ...current, index: (current.index - 1 + current.images.length) % current.images.length }
+        : current
+    )
+
+  useEffect(() => {
+    if (!lightbox) return
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightbox(null)
+      if (e.key === 'ArrowRight') showNext()
+      if (e.key === 'ArrowLeft') showPrev()
+    }
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
+  }, [lightbox])
 
   return (
     <div>
@@ -215,7 +248,7 @@ export default function Services() {
                 key={src}
                 src={src}
                 alt={`Landscaping levelling ${i + 1}`}
-                onClick={() => setLightboxSrc(src)}
+                onClick={() => openLightbox(landscapingPhotos, src)}
                 className="w-full h-32 object-cover rounded-md cursor-pointer hover:opacity-90 transition-opacity"
               />
             ))}
@@ -240,7 +273,7 @@ export default function Services() {
                     <img
                       src={set.before}
                       alt={`${set.title} before`}
-                      onClick={() => setLightboxSrc(set.before)}
+                      onClick={() => openLightbox(beforeAfterPhotos, set.before)}
                       className="w-full h-40 object-cover rounded-md cursor-pointer hover:opacity-90 transition-opacity"
                     />
                   )}
@@ -253,7 +286,7 @@ export default function Services() {
                     <img
                       src={set.after}
                       alt={`${set.title} after`}
-                      onClick={() => setLightboxSrc(set.after)}
+                      onClick={() => openLightbox(beforeAfterPhotos, set.after)}
                       className="w-full h-40 object-cover rounded-md cursor-pointer hover:opacity-90 transition-opacity"
                     />
                   )}
@@ -294,24 +327,57 @@ export default function Services() {
         </div>
       </section>
 
-      {lightboxSrc && (
+      {lightbox && (
         <div
           className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4"
-          onClick={() => setLightboxSrc(null)}
+          onClick={() => setLightbox(null)}
         >
           <button
             className="absolute top-4 right-4 text-white hover:text-gray-300"
-            onClick={() => setLightboxSrc(null)}
+            onClick={() => setLightbox(null)}
             aria-label="Close"
           >
             <X size={32} />
           </button>
+
+          {lightbox.images.length > 1 && (
+            <button
+              className="absolute left-2 md:left-6 text-white hover:text-gray-300"
+              onClick={(e) => {
+                e.stopPropagation()
+                showPrev()
+              }}
+              aria-label="Previous photo"
+            >
+              <ChevronLeft size={40} />
+            </button>
+          )}
+
           <img
-            src={lightboxSrc}
+            src={lightbox.images[lightbox.index]}
             alt="Full size view"
             className="max-w-full max-h-full object-contain"
             onClick={(e) => e.stopPropagation()}
           />
+
+          {lightbox.images.length > 1 && (
+            <button
+              className="absolute right-2 md:right-6 text-white hover:text-gray-300"
+              onClick={(e) => {
+                e.stopPropagation()
+                showNext()
+              }}
+              aria-label="Next photo"
+            >
+              <ChevronRight size={40} />
+            </button>
+          )}
+
+          {lightbox.images.length > 1 && (
+            <p className="absolute bottom-4 text-white/70 text-sm">
+              {lightbox.index + 1} / {lightbox.images.length}
+            </p>
+          )}
         </div>
       )}
     </div>
