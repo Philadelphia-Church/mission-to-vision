@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { Trees, Mountain, Droplets, Home } from 'lucide-react'
 
 const quickServices = [
   'Residential Land Clearing',
@@ -12,6 +13,7 @@ const quickServices = [
 const serviceGroups = [
   {
     title: 'Site Clearing and Cleanup',
+    icon: Trees,
     items: [
       {
         name: 'Debris Removal',
@@ -29,6 +31,7 @@ const serviceGroups = [
   },
   {
     title: 'Earthworks and Grading',
+    icon: Mountain,
     items: [
       {
         name: 'Levelling and Grading',
@@ -46,6 +49,7 @@ const serviceGroups = [
   },
   {
     title: 'Trenching and Drainage',
+    icon: Droplets,
     items: [
       {
         name: 'Irrigation Trenches',
@@ -63,6 +67,7 @@ const serviceGroups = [
   },
   {
     title: 'Hardscape Preparation',
+    icon: Home,
     items: [
       {
         name: 'Patio and Pathway Bases',
@@ -130,7 +135,12 @@ export default function Services() {
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {serviceGroups.map((group) => (
             <div key={group.title} className="card">
-              <h3 className="font-bold text-xl mb-4 text-secondary-700">{group.title}</h3>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="flex items-center justify-center h-10 w-10 rounded-full bg-primary-50 text-primary-600 flex-shrink-0">
+                  <group.icon size={20} />
+                </span>
+                <h3 className="font-bold text-xl text-secondary-700">{group.title}</h3>
+              </div>
               <ul className="space-y-3">
                 {group.items.map((item) => (
                   <li key={item.name}>
