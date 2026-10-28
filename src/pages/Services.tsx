@@ -85,6 +85,38 @@ const serviceGroups = [
   },
 ]
 
+const beforeAfterSets = [
+  {
+    title: 'Land Clearing',
+    before: '/images/services/land-clearing-1-before.jpg',
+    after: '/images/services/land-clearing-1-after.jpg',
+  },
+  {
+    title: 'Weed Removal',
+    before: '/images/services/weed-removal-1-before.jpg',
+    after: '/images/services/weed-removal-1-after.jpg',
+  },
+  {
+    title: 'Weed Removal',
+    before: '/images/services/weed-removal-2-before.jpg',
+    after: '/images/services/weed-removal-2-after.jpg',
+  },
+  {
+    title: 'Weed Removal',
+    before: '/images/services/weed-removal-3-before.jpg',
+    after: '/images/services/weed-removal-3-after.mp4',
+    afterIsVideo: true,
+  },
+]
+
+const landscapingPhotos = [
+  '/images/services/landscaping-leveling-1.jpg',
+  '/images/services/landscaping-leveling-2.jpg',
+  '/images/services/landscaping-leveling-3.jpg',
+  '/images/services/landscaping-leveling-4.jpg',
+  '/images/services/landscaping-leveling-5.jpg',
+]
+
 const landClearingCoverage = [
   'Tree clearing services and bulk vegetation removal',
   'Scrub removal, brush and undergrowth removal',
@@ -157,6 +189,59 @@ export default function Services() {
               </ul>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="section-container">
+        <h2 className="section-title">Before &amp; After</h2>
+        <p className="section-subtitle max-w-2xl mx-auto">Real results from recent jobs.</p>
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {beforeAfterSets.map((set, i) => (
+            <div key={i} className="card">
+              <h3 className="font-bold text-lg mb-3 text-secondary-700">{set.title}</h3>
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <img
+                    src={set.before}
+                    alt={`${set.title} before`}
+                    className="w-full h-40 object-cover rounded-md"
+                  />
+                  <p className="text-xs text-center text-gray-500 mt-1">Before</p>
+                </div>
+                <div>
+                  {set.afterIsVideo ? (
+                    <video src={set.after} controls className="w-full h-40 object-cover rounded-md" />
+                  ) : (
+                    <img
+                      src={set.after}
+                      alt={`${set.title} after`}
+                      className="w-full h-40 object-cover rounded-md"
+                    />
+                  )}
+                  <p className="text-xs text-center text-gray-500 mt-1">After</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="bg-secondary-50">
+        <div className="section-container">
+          <h2 className="section-title">Recent Landscaping Work</h2>
+          <p className="section-subtitle max-w-2xl mx-auto">
+            Levelling and grading from a recent site.
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-5xl mx-auto">
+            {landscapingPhotos.map((src, i) => (
+              <img
+                key={src}
+                src={src}
+                alt={`Landscaping levelling ${i + 1}`}
+                className="w-full h-32 object-cover rounded-md"
+              />
+            ))}
+          </div>
         </div>
       </section>
 
