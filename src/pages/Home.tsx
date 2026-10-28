@@ -13,7 +13,7 @@ export default function Home() {
             Training and Equipping People
           </h1>
           <p className="text-lg text-primary-50 max-w-2xl mx-auto mb-8">
-            Mission to Vision exists to help people grow in character, skill, and calling &mdash;
+            Mission to Vision exists to help people grow in character, skill, and calling,
             turning God-given potential into real, lived-out purpose.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
@@ -30,7 +30,7 @@ export default function Home() {
       <section className="section-container">
         <h2 className="section-title">Our Approach</h2>
         <p className="section-subtitle max-w-2xl mx-auto">
-          From mission to vision &mdash; we walk alongside people as they discover what they're
+          From mission to vision, we walk alongside people as they discover what they're
           called to do, then equip them with the training to do it well.
         </p>
         <div className="grid md:grid-cols-3 gap-6">

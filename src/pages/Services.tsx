@@ -96,7 +96,7 @@ export default function Services() {
         <div className="section-container text-center">
           <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">Our Services</h1>
           <p className="text-lg text-primary-50 max-w-2xl mx-auto mb-6">
-            Our trained teams are ready for any quote &mdash; we beat and match the price, without
+            Our trained teams are ready for any quote, and we beat and match the price without
             compromising on professional quality.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
