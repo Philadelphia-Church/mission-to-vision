@@ -16,8 +16,9 @@ export default function Header() {
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 flex items-center justify-between h-16">
-        <Link to="/" className="font-serif text-xl font-bold text-primary-700">
-          Mission to Vision
+        <Link to="/" className="flex items-center gap-2">
+          <img src="/images/logo.png" alt="Mission to Vision" className="h-12 w-12 object-contain" />
+          <span className="font-serif text-xl font-bold text-primary-700">Mission to Vision</span>
         </Link>
 
         <nav className="hidden md:flex gap-8">

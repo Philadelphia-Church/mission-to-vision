@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom'
 export default function Home() {
   return (
     <div>
+      <div className="pt-10 pb-2 text-center">
+        <img src="/images/logo.png" alt="Mission to Vision" className="h-40 w-40 object-contain mx-auto" />
+      </div>
+
       <section className="bg-primary-700 text-white">
         <div className="section-container text-center">
           <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">
