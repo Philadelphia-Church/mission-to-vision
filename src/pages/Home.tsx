@@ -25,41 +25,64 @@ const whatWeDo = [
   },
 ]
 
-const projectPhotos = [
-  '/images/services/land-clearing-1-before.jpg',
-  '/images/services/land-clearing-1-after.jpg',
-  '/images/services/weed-removal-1-before.jpg',
-  '/images/services/weed-removal-1-after.jpg',
-  '/images/services/weed-removal-2-before.jpg',
-  '/images/services/weed-removal-2-after.jpg',
-  '/images/services/weed-removal-3-before.jpg',
-  '/images/services/landscaping-leveling-1.jpg',
-  '/images/services/landscaping-leveling-2.jpg',
-  '/images/services/landscaping-leveling-3.jpg',
-  '/images/services/landscaping-leveling-4.jpg',
-  '/images/services/landscaping-leveling-5.jpg',
-  '/images/services/brookfield-1-before.jpg',
-  '/images/services/brookfield-1-after.jpg',
-  '/images/services/brookfield-2-before.jpg',
-  '/images/services/brookfield-2-after.jpg',
-  '/images/services/brookfield-3-before.jpg',
-  '/images/services/brookfield-3-after.jpg',
-  '/images/services/brookfield-4-before.jpg',
-  '/images/services/brookfield-4-after.jpg',
-  '/images/services/brookfield-5-before.jpg',
-  '/images/services/brookfield-5-after.jpg',
+const projectCategories = [
+  {
+    title: 'Landscaping Work',
+    photos: [
+      '/images/services/land-clearing-1-after.jpg',
+      '/images/services/landscaping-leveling-1.jpg',
+      '/images/services/landscaping-leveling-2.jpg',
+      '/images/services/landscaping-leveling-3.jpg',
+      '/images/services/landscaping-leveling-4.jpg',
+      '/images/services/landscaping-leveling-5.jpg',
+    ],
+  },
+  {
+    title: 'Land Levelling',
+    photos: [
+      '/images/services/brookfield-1-after.jpg',
+      '/images/services/brookfield-2-after.jpg',
+      '/images/services/brookfield-3-after.jpg',
+      '/images/services/brookfield-4-after.jpg',
+      '/images/services/brookfield-5-after.jpg',
+    ],
+  },
+  {
+    title: 'Garden Work',
+    photos: [
+      '/images/services/weed-removal-1-before.jpg',
+      '/images/services/weed-removal-2-before.jpg',
+      '/images/services/weed-removal-3-before.jpg',
+    ],
+  },
 ]
 
-export default function Home() {
+function MiniSlideshow({ title, photos }: { title: string; photos: string[] }) {
   const [slide, setSlide] = useState(0)
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setSlide((i) => (i + 1) % projectPhotos.length)
+      setSlide((i) => (i + 1) % photos.length)
     }, 3000)
     return () => clearInterval(timer)
-  }, [])
+  }, [photos.length])
 
+  return (
+    <div className="card">
+      <div className="relative aspect-video rounded-md overflow-hidden bg-gray-100 mb-3">
+        <img
+          key={slide}
+          src={photos[slide]}
+          alt={`${title} photo ${slide + 1}`}
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <h3 className="font-bold text-lg text-secondary-700 text-center">{title}</h3>
+    </div>
+  )
+}
+
+export default function Home() {
   return (
     <div>
       <div className="pt-10 pb-2 text-center">
@@ -111,74 +134,55 @@ export default function Home() {
 
       <section className="bg-secondary-50">
         <div className="section-container">
-          <h2 className="section-title">How We Train People</h2>
-          <p className="section-subtitle max-w-2xl mx-auto">
-            From mission to vision, we walk alongside people as they discover what they're
-            called to do, then equip them with the training to do it well.
-          </p>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="card">
-              <h3 className="font-bold text-lg mb-2 text-secondary-700">Train</h3>
-              <p className="text-gray-600 text-sm">
-                Practical, hands-on training programs built around real-world ministry and life skills.
-              </p>
-            </div>
-            <div className="card">
-              <h3 className="font-bold text-lg mb-2 text-secondary-700">Equip</h3>
-              <p className="text-gray-600 text-sm">
-                Mentorship and resources that help people put what they've learned into practice.
-              </p>
-            </div>
-            <div className="card">
-              <h3 className="font-bold text-lg mb-2 text-secondary-700">Send</h3>
-              <p className="text-gray-600 text-sm">
-                Supporting people as they step into their calling, in the church and in the community.
-              </p>
-            </div>
+          <h2 className="section-title">Our Projects</h2>
+          <p className="section-subtitle max-w-2xl mx-auto">A look at recent work.</p>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {projectCategories.map((category) => (
+              <MiniSlideshow key={category.title} title={category.title} photos={category.photos} />
+            ))}
           </div>
-          <div className="text-center mt-10 max-w-2xl mx-auto">
-            <p className="text-gray-700">
-              We bring people together to train and grow through real, hands-on work &mdash; every
-              job helps both our customers and the person learning the trade.
-            </p>
-            <p className="font-serif italic text-xl text-secondary-700 mt-4">
-              Money is not our motive.
-            </p>
+          <div className="text-center mt-8">
+            <Link to="/services" className="btn-primary">
+              More Details
+            </Link>
           </div>
         </div>
       </section>
 
       <section className="section-container">
-        <h2 className="section-title">Our Projects</h2>
+        <h2 className="section-title">How We Train People</h2>
         <p className="section-subtitle max-w-2xl mx-auto">
-          A look at recent work &mdash; before and after.
+          From mission to vision, we walk alongside people as they discover what they're
+          called to do, then equip them with the training to do it well.
         </p>
-        <div className="max-w-2xl mx-auto">
-          <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-100">
-            <img
-              key={slide}
-              src={projectPhotos[slide]}
-              alt={`Recent project photo ${slide + 1}`}
-              className="w-full h-full object-cover"
-            />
+        <div className="grid md:grid-cols-3 gap-6">
+          <div className="card">
+            <h3 className="font-bold text-lg mb-2 text-secondary-700">Train</h3>
+            <p className="text-gray-600 text-sm">
+              Practical, hands-on training programs built around real-world ministry and life skills.
+            </p>
           </div>
-          <div className="flex justify-center gap-1.5 mt-4">
-            {projectPhotos.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setSlide(i)}
-                aria-label={`Show photo ${i + 1}`}
-                className={`h-2 w-2 rounded-full transition-colors ${
-                  i === slide ? 'bg-primary-600' : 'bg-gray-300'
-                }`}
-              />
-            ))}
+          <div className="card">
+            <h3 className="font-bold text-lg mb-2 text-secondary-700">Equip</h3>
+            <p className="text-gray-600 text-sm">
+              Mentorship and resources that help people put what they've learned into practice.
+            </p>
+          </div>
+          <div className="card">
+            <h3 className="font-bold text-lg mb-2 text-secondary-700">Send</h3>
+            <p className="text-gray-600 text-sm">
+              Supporting people as they step into their calling, in the church and in the community.
+            </p>
           </div>
         </div>
-        <div className="text-center mt-8">
-          <Link to="/services" className="btn-primary">
-            More Details
-          </Link>
+        <div className="text-center mt-10 max-w-2xl mx-auto">
+          <p className="text-gray-700">
+            We bring people together to train and grow through real, hands-on work &mdash; every
+            job helps both our customers and the person learning the trade.
+          </p>
+          <p className="font-serif italic text-xl text-secondary-700 mt-4">
+            Money is not our motive.
+          </p>
         </div>
       </section>
     </div>
