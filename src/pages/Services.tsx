@@ -116,6 +116,31 @@ const beforeAfterSets: BeforeAfterSet[] = [
     beforeIsVideo: true,
     after: '/images/services/weed-removal-3-before.jpg',
   },
+  {
+    title: 'Land Levelling – Brookfield',
+    before: '/images/services/brookfield-1-before.jpg',
+    after: '/images/services/brookfield-1-after.jpg',
+  },
+  {
+    title: 'Land Levelling – Brookfield',
+    before: '/images/services/brookfield-2-before.jpg',
+    after: '/images/services/brookfield-2-after.jpg',
+  },
+  {
+    title: 'Land Levelling – Brookfield',
+    before: '/images/services/brookfield-3-before.jpg',
+    after: '/images/services/brookfield-3-after.jpg',
+  },
+  {
+    title: 'Land Levelling – Brookfield',
+    before: '/images/services/brookfield-4-before.jpg',
+    after: '/images/services/brookfield-4-after.jpg',
+  },
+  {
+    title: 'Land Levelling – Brookfield',
+    before: '/images/services/brookfield-5-before.jpg',
+    after: '/images/services/brookfield-5-after.jpg',
+  },
 ]
 
 const landscapingPhotos = [
