@@ -116,31 +116,6 @@ const beforeAfterSets: BeforeAfterSet[] = [
     beforeIsVideo: true,
     after: '/images/services/weed-removal-3-before.jpg',
   },
-  {
-    title: 'Land Levelling – Brookfield',
-    before: '/images/services/brookfield-1-before.jpg',
-    after: '/images/services/brookfield-1-after.jpg',
-  },
-  {
-    title: 'Land Levelling – Brookfield',
-    before: '/images/services/brookfield-2-before.jpg',
-    after: '/images/services/brookfield-2-after.jpg',
-  },
-  {
-    title: 'Land Levelling – Brookfield',
-    before: '/images/services/brookfield-3-before.jpg',
-    after: '/images/services/brookfield-3-after.jpg',
-  },
-  {
-    title: 'Land Levelling – Brookfield',
-    before: '/images/services/brookfield-4-before.jpg',
-    after: '/images/services/brookfield-4-after.jpg',
-  },
-  {
-    title: 'Land Levelling – Brookfield',
-    before: '/images/services/brookfield-5-before.jpg',
-    after: '/images/services/brookfield-5-after.jpg',
-  },
 ]
 
 const landscapingPhotos = [
@@ -149,6 +124,22 @@ const landscapingPhotos = [
   '/images/services/landscaping-leveling-3.jpg',
   '/images/services/landscaping-leveling-4.jpg',
   '/images/services/landscaping-leveling-5.jpg',
+]
+
+const brookfieldBeforePhotos = [
+  '/images/services/brookfield-1-before.jpg',
+  '/images/services/brookfield-2-before.jpg',
+  '/images/services/brookfield-3-before.jpg',
+  '/images/services/brookfield-4-before.jpg',
+  '/images/services/brookfield-5-before.jpg',
+]
+
+const brookfieldAfterPhotos = [
+  '/images/services/brookfield-1-after.jpg',
+  '/images/services/brookfield-2-after.jpg',
+  '/images/services/brookfield-3-after.jpg',
+  '/images/services/brookfield-4-after.jpg',
+  '/images/services/brookfield-5-after.jpg',
 ]
 
 const beforeAfterPhotos = beforeAfterSets.flatMap((set) => [
@@ -274,6 +265,40 @@ export default function Services() {
                 src={src}
                 alt={`Landscaping levelling ${i + 1}`}
                 onClick={() => openLightbox(landscapingPhotos, src)}
+                className="w-full h-32 object-cover rounded-md cursor-pointer hover:opacity-90 transition-opacity"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-container">
+        <h2 className="section-title">Land Levelling – Brookfield</h2>
+        <p className="section-subtitle max-w-2xl mx-auto">
+          Click a photo to view it full size.
+        </p>
+        <div className="max-w-5xl mx-auto">
+          <h3 className="font-bold text-lg mb-3 text-secondary-700">Before</h3>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10">
+            {brookfieldBeforePhotos.map((src, i) => (
+              <img
+                key={src}
+                src={src}
+                alt={`Land Levelling Brookfield before ${i + 1}`}
+                onClick={() => openLightbox(brookfieldBeforePhotos, src)}
+                className="w-full h-32 object-cover rounded-md cursor-pointer hover:opacity-90 transition-opacity"
+              />
+            ))}
+          </div>
+
+          <h3 className="font-bold text-lg mb-3 text-secondary-700">After</h3>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {brookfieldAfterPhotos.map((src, i) => (
+              <img
+                key={src}
+                src={src}
+                alt={`Land Levelling Brookfield after ${i + 1}`}
+                onClick={() => openLightbox(brookfieldAfterPhotos, src)}
                 className="w-full h-32 object-cover rounded-md cursor-pointer hover:opacity-90 transition-opacity"
               />
             ))}
