@@ -69,7 +69,7 @@ function MiniSlideshow({ title, photos }: { title: string; photos: string[] }) {
 
   return (
     <div className="card">
-      <div className="relative aspect-video rounded-md overflow-hidden bg-gray-100 mb-3">
+      <div className="relative aspect-[4/3] rounded-md overflow-hidden bg-gray-100 mb-3">
         <img
           key={slide}
           src={photos[slide]}
@@ -136,7 +136,7 @@ export default function Home() {
         <div className="section-container">
           <h2 className="section-title">Our Projects</h2>
           <p className="section-subtitle max-w-2xl mx-auto">A look at recent work.</p>
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {projectCategories.map((category) => (
               <MiniSlideshow key={category.title} title={category.title} photos={category.photos} />
             ))}
