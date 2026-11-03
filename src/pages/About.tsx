@@ -2,6 +2,12 @@ export default function About() {
   return (
     <div className="section-container max-w-3xl mx-auto">
       <h1 className="section-title">About Mission to Vision</h1>
+      <blockquote className="text-center mb-8">
+        <p className="font-serif italic text-2xl text-secondary-700">
+          &ldquo;Let brotherly love continue.&rdquo;
+        </p>
+        <cite className="block not-italic text-sm text-gray-500 mt-2">Hebrews 13:1</cite>
+      </blockquote>
       <p className="text-gray-700 leading-relaxed mb-4">
         Mission to Vision is a training and equipping ministry of Philadelphia Church. We believe
         that every person has a God-given mission, and our role is to help turn that mission into
