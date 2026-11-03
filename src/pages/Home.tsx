@@ -1,6 +1,65 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Sprout, Trees, Droplets, Wrench } from 'lucide-react'
+
+const whatWeDo = [
+  {
+    title: 'Gardening',
+    icon: Sprout,
+    description: 'Planting, pruning, mowing, and seasonal garden care.',
+  },
+  {
+    title: 'Landscaping',
+    icon: Trees,
+    description: 'Landscape design, turf, land clearing and levelling.',
+  },
+  {
+    title: 'Irrigation',
+    icon: Droplets,
+    description: 'Sprinkler and drip irrigation installation and repairs.',
+  },
+  {
+    title: 'Handyman',
+    icon: Wrench,
+    description: 'Home repairs, furniture assembly, fences and more.',
+  },
+]
+
+const projectPhotos = [
+  '/images/services/land-clearing-1-before.jpg',
+  '/images/services/land-clearing-1-after.jpg',
+  '/images/services/weed-removal-1-before.jpg',
+  '/images/services/weed-removal-1-after.jpg',
+  '/images/services/weed-removal-2-before.jpg',
+  '/images/services/weed-removal-2-after.jpg',
+  '/images/services/weed-removal-3-before.jpg',
+  '/images/services/landscaping-leveling-1.jpg',
+  '/images/services/landscaping-leveling-2.jpg',
+  '/images/services/landscaping-leveling-3.jpg',
+  '/images/services/landscaping-leveling-4.jpg',
+  '/images/services/landscaping-leveling-5.jpg',
+  '/images/services/brookfield-1-before.jpg',
+  '/images/services/brookfield-1-after.jpg',
+  '/images/services/brookfield-2-before.jpg',
+  '/images/services/brookfield-2-after.jpg',
+  '/images/services/brookfield-3-before.jpg',
+  '/images/services/brookfield-3-after.jpg',
+  '/images/services/brookfield-4-before.jpg',
+  '/images/services/brookfield-4-after.jpg',
+  '/images/services/brookfield-5-before.jpg',
+  '/images/services/brookfield-5-after.jpg',
+]
 
 export default function Home() {
+  const [slide, setSlide] = useState(0)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSlide((i) => (i + 1) % projectPhotos.length)
+    }, 3000)
+    return () => clearInterval(timer)
+  }, [])
+
   return (
     <div>
       <div className="pt-10 pb-2 text-center">
@@ -28,30 +87,98 @@ export default function Home() {
       </section>
 
       <section className="section-container">
-        <h2 className="section-title">Our Approach</h2>
+        <h2 className="section-title">What Do We Do?</h2>
         <p className="section-subtitle max-w-2xl mx-auto">
-          From mission to vision, we walk alongside people as they discover what they're
-          called to do, then equip them with the training to do it well.
+          Garden and home care across Melbourne, done by people we're training and equipping.
         </p>
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="card">
-            <h3 className="font-bold text-lg mb-2 text-secondary-700">Train</h3>
-            <p className="text-gray-600 text-sm">
-              Practical, hands-on training programs built around real-world ministry and life skills.
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {whatWeDo.map((item) => (
+            <div key={item.title} className="card text-center">
+              <span className="flex items-center justify-center h-12 w-12 rounded-full bg-primary-50 text-primary-600 mx-auto mb-3">
+                <item.icon size={24} />
+              </span>
+              <h3 className="font-bold text-lg mb-2 text-secondary-700">{item.title}</h3>
+              <p className="text-gray-600 text-sm">{item.description}</p>
+            </div>
+          ))}
+        </div>
+        <div className="text-center mt-8">
+          <Link to="/services" className="btn-outline">
+            More Details
+          </Link>
+        </div>
+      </section>
+
+      <section className="bg-secondary-50">
+        <div className="section-container">
+          <h2 className="section-title">How We Train People</h2>
+          <p className="section-subtitle max-w-2xl mx-auto">
+            From mission to vision, we walk alongside people as they discover what they're
+            called to do, then equip them with the training to do it well.
+          </p>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="card">
+              <h3 className="font-bold text-lg mb-2 text-secondary-700">Train</h3>
+              <p className="text-gray-600 text-sm">
+                Practical, hands-on training programs built around real-world ministry and life skills.
+              </p>
+            </div>
+            <div className="card">
+              <h3 className="font-bold text-lg mb-2 text-secondary-700">Equip</h3>
+              <p className="text-gray-600 text-sm">
+                Mentorship and resources that help people put what they've learned into practice.
+              </p>
+            </div>
+            <div className="card">
+              <h3 className="font-bold text-lg mb-2 text-secondary-700">Send</h3>
+              <p className="text-gray-600 text-sm">
+                Supporting people as they step into their calling, in the church and in the community.
+              </p>
+            </div>
+          </div>
+          <div className="text-center mt-10 max-w-2xl mx-auto">
+            <p className="text-gray-700">
+              We bring people together to train and grow through real, hands-on work &mdash; every
+              job helps both our customers and the person learning the trade.
+            </p>
+            <p className="font-serif italic text-xl text-secondary-700 mt-4">
+              Money is not our motive.
             </p>
           </div>
-          <div className="card">
-            <h3 className="font-bold text-lg mb-2 text-secondary-700">Equip</h3>
-            <p className="text-gray-600 text-sm">
-              Mentorship and resources that help people put what they've learned into practice.
-            </p>
+        </div>
+      </section>
+
+      <section className="section-container">
+        <h2 className="section-title">Our Projects</h2>
+        <p className="section-subtitle max-w-2xl mx-auto">
+          A look at recent work &mdash; before and after.
+        </p>
+        <div className="max-w-2xl mx-auto">
+          <div className="relative aspect-video rounded-lg overflow-hidden bg-gray-100">
+            <img
+              key={slide}
+              src={projectPhotos[slide]}
+              alt={`Recent project photo ${slide + 1}`}
+              className="w-full h-full object-cover"
+            />
           </div>
-          <div className="card">
-            <h3 className="font-bold text-lg mb-2 text-secondary-700">Send</h3>
-            <p className="text-gray-600 text-sm">
-              Supporting people as they step into their calling, in the church and in the community.
-            </p>
+          <div className="flex justify-center gap-1.5 mt-4">
+            {projectPhotos.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setSlide(i)}
+                aria-label={`Show photo ${i + 1}`}
+                className={`h-2 w-2 rounded-full transition-colors ${
+                  i === slide ? 'bg-primary-600' : 'bg-gray-300'
+                }`}
+              />
+            ))}
           </div>
+        </div>
+        <div className="text-center mt-8">
+          <Link to="/services" className="btn-primary">
+            More Details
+          </Link>
         </div>
       </section>
     </div>
